@@ -43,4 +43,17 @@ public class AutenticacionController {
 
  // close
 
+  @PostMapping("/close")
+  public CloseResponse close(@RequestBody CloseRequest request){
+    try{
+      Thread.sleep(Duration.ofSeconds(3));
+      autenticacionService.cerrarSesion(request);
+      return new CloseResponse("00","");
+    } catch (IOException | InterruptedException e) {
+      System.out.println(e.getMessage());
+      return new CloseResponse("99","Ocurrió un problema en el servidor");
+    }
+  }
+
+
 }
